@@ -3,6 +3,7 @@ import java.awt.event.*;
 public class mouse extends Applet implements MouseListener{
   public void init(){
     this.addMouseListener(this);
+    setSize(1000,700);
   }
   public void mouseClicked(MouseEvent e){
 
