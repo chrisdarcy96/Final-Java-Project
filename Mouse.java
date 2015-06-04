@@ -29,7 +29,7 @@ public class Mouse extends Applet implements MouseListener{
     bgp.setBackGroundImage(backGround);
     setLayout(new BorderLayout());
     add(bgp);
-    
+
   }
   public void mouseClicked(MouseEvent e){
     //if((e.getX() >= birdx) && (e.getX() <= birdx+75) && (e.getY() >= birdy) && (e.getY <= birdy+60)){
@@ -67,10 +67,10 @@ class BackGroundPanel extends Panel {
      }
 
      public void setBackGroundImage(Image backGround) {
-          this.backGround = backGround;    
+          this.backGround = backGround;
      }
 
      private Image getBackGroundImage() {
-          return backGround;    
+          return backGround;
      }
 }

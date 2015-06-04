@@ -3,10 +3,12 @@ import java.awt.*;
 
 public class Graphics extends Applet implements Runnable{
   private Image duck;
+  private Image backgrd;
 
   public void init(){
     duck=getImage(getDocumentBase(), "duckspriteactual.png");
-    setBackground(Color.white);
+    backgrd=getImage(getDocumentBase(). "Duck_Hunt_Lucasta_DA_Wide.png");
+    setBackground(Color.
 
   }
 
