@@ -12,7 +12,7 @@ import java.net.*;
 import java.io.IOException.*;
 
 public class Mouse extends Applet implements MouseListener{
-  Image backGround;
+  private Image backGround;
   public void init(){
     //The following is adding the picture to the background of the panel
     //---------------------------------------------------------
