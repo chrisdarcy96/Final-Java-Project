@@ -1,7 +1,8 @@
 public class Bird
 {
   public int speed;
-  public int placement;
+  public int enterplacement;
+  public int motionvec;
   public enum type{
       DUCK, BONUS, PENGUIN, EAGLE
 }
@@ -11,6 +12,7 @@ public class Bird
     speed = birdspeed;
     placement = birdplacement;
     type = birdtype;
+    vector = motionvec;
   }
 
   public void setSpeed(int val)
@@ -18,10 +20,16 @@ public class Bird
     speed = val;
   }
 
-  public void setPlacement(int val)
+  public void setEntryPlacement(int val)
   {
-    placement = val;
+    enterplacement = val;
   }
+
+  public void setMotionVector(int val)
+  {
+    motionvec = val;
+  }
+
   public void setType(enum val)
   {
     type = val;
