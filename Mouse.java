@@ -24,12 +24,12 @@ public class Mouse extends Applet implements MouseListener{
     this.addMouseListener(this);
     setSize(1400,800);
     backGround = getImage(getCodeBase(), "Duck_Hunt_Lucasta_DA_Wide.png");
-    BackGroundPanel bgp = new BackGroundPanel();
-    bgp.setLayout(new FlowLayout());
-    bgp.setBackGroundImage(backGround);
-    setLayout(new BorderLayout());
-    add(bgp);
+    setBackground(Color.cyan);
 
+  }
+
+  public void paint(Graphics g){
+    g.drawImage(backGround, 0 ,0, this);
   }
   public void mouseClicked(MouseEvent e){
     //if((e.getX() >= birdx) && (e.getX() <= birdx+75) && (e.getY() >= birdy) && (e.getY <= birdy+60)){
@@ -50,27 +50,4 @@ public class Mouse extends Applet implements MouseListener{
   public void mousePressed(MouseEvent e){
 
   }
-}
-class BackGroundPanel extends Panel {
-     Image backGround;
-
-     BackGroundPanel() {
-          super();
-     }
-
-     public void paint(Graphics g) {
-
-          // get the size of this panel (which is the size of the applet),
-          // and draw the image
-          g.drawImage(getBackGroundImage(), 0, 0,
-              (int)getBounds().getWidth(), (int)getBounds().getHeight(), this);
-     }
-
-     public void setBackGroundImage(Image backGround) {
-          this.backGround = backGround;
-     }
-
-     private Image getBackGroundImage() {
-          return backGround;
-     }
 }
