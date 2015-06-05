@@ -15,6 +15,12 @@ public class Mouse extends Applet implements MouseListener{
   Image backGround;
   public void init(){
     setSize(1400,800);
+    backGround = getImage(getCodeBase() , "shooterbackground.png");
+    g.drawImage(backGround, 100, 100, 800, 550, this);
+    
+  }
+  public void paint(Graphics g){
+      backg.drawImage(backGround, 100, 100, 800, 550, this);
   }
   public void mouseClicked(MouseEvent e){
     //if((e.getX() >= birdx) && (e.getX() <= birdx+75) && (e.getY() >= birdy) && (e.getY <= birdy+60)){
