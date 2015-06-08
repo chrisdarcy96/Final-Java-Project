@@ -9,7 +9,7 @@ import java.awt.event.*;
 public class DuckMovement{
 
 
-    public static void main(String[] args) {
+    public void main(String[] args) {
 
         BufferedImage myImage;
         try{
@@ -81,10 +81,10 @@ class Clicker extends JComponent implements MouseListener{
 
 
 class DuckCanvas extends JComponent{
-    private int duckW = 135;
-    private int duckH = 95;
-    private int duckX = 800;
-    private int duckY = getHeight()/2 - duckH;
+    private static int duckW = 135;
+    private static int duckH = 95;
+    private static int duckX = 800;
+    private static int duckY = getHeight()/2 - duckH;
     private Image duck = new ImageIcon("duck.png").getImage();
     private int score = 0;
 
@@ -101,20 +101,20 @@ class DuckCanvas extends JComponent{
 
         animationThread.start();
     }
-    public void setX(int xval)
+    public static void setX(int xval)
     {
       duckX = xval;
     }
 
-    public int getduckX(){return duckX;}
-    public int getduckY(){return duckY;}
-    public int getduckH(){return duckH;}
-    public int getduckW(){return duckW;}
+    public static int getduckX(){return duckX;}
+    public static int getduckY(){return duckY;}
+    public static int getduckH(){return duckH;}
+    public static int getduckW(){return duckW;}
     public void paintComponent(Graphics g) {
         Graphics2D gg = (Graphics2D) g;
 
         int w = getWidth();
-        int h = getHeight();
+        static int h = getHeight();
 
 
         int duckSpeed = 3;
