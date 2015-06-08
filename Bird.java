@@ -1,18 +1,18 @@
+
+//REMOVE http://www.cokeandcode.com/info/tut2d.html
+
 public class Bird
 {
   public int speed;
   public int enterplacement;
-  public int motionvec;
-  public enum type{
-      DUCK, BONUS, PENGUIN, EAGLE
-}
+  public Image image;
 
-  public Bird(int birdspeed, int birdplacement, enum birdtype)
+  public Bird(int birdspeed, int birdplacement, Image im)
   {
     speed = birdspeed;
     placement = birdplacement;
-    type = birdtype;
-    vector = motionvec;
+    image = im;
+
   }
 
   public void setSpeed(int val)
@@ -25,13 +25,8 @@ public class Bird
     enterplacement = val;
   }
 
-  public void setMotionVector(int val)
+  public void setImage (Image i)
   {
-    motionvec = val;
-  }
-
-  public void setType(enum val)
-  {
-    type = val;
+    image = i;
   }
 }
