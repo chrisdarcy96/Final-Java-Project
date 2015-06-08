@@ -1,16 +1,21 @@
+
+//REMOVE http://www.cokeandcode.com/info/tut2d.html
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
 public class Bird
 {
   public int speed;
   public int placement;
-  public enum type{
-      DUCK, BONUS, PENGUIN, EAGLE
-}
+  public Image image;
 
-  public Bird(int birdspeed, int birdplacement, enum birdtype)
+  public Bird(int birdspeed, int birdplacement, Image im)
   {
     speed = birdspeed;
     placement = birdplacement;
-    type = birdtype;
+    image = im;
+
   }
 
   public void setSpeed(int val)
@@ -22,8 +27,9 @@ public class Bird
   {
     placement = val;
   }
-  public void setType(enum val)
+
+  public void setImage (Image i)
   {
-    type = val;
+    image = i;
   }
 }
