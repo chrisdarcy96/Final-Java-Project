@@ -14,18 +14,22 @@ public class GraphicThing extends JApplet implements MouseListener, MouseMotionL
     setBackground(Color.cyan);
     addMouseListener(this);
     addMouseMotionListener(this);
+    setVisible(true);
 
   }
 
 
   public void paint(Graphics g){
     g.drawImage(backgrd, 0, 0, this);
+    //showStatus("Testing");
     showStatus("Mouse Location: ("+getX()+", "+getY()+")");
   }
 
   public void setDuck(Bird duck){
-    int xLoc=500*Math.random();
-    //duck=new Bird(0, xLoc, duck);
+    int xLoc=(int)(500.0*Math.random());
+    //x-loc is random location between
+    //y-location should be set to 60
+    duck=new Bird(0, xLoc, duck);
   }
 
   public void moveDuck(){
