@@ -101,12 +101,13 @@ class DuckCanvas extends JComponent{
     private static int score = 0;
     private static int duckSpeed = 3;
     private static int level = 1;
+    private static int missed =0;
 
 
     public DuckCanvas() {
         Thread animationThread = new Thread(new Runnable() {
             public void run() {
-                while (true) {
+                while (missed<5) {
                     repaint();
                     try {Thread.sleep(10);} catch (Exception ex) {}
                 }
@@ -120,6 +121,7 @@ class DuckCanvas extends JComponent{
       level++;
       duckSpeed+=2;
       score = 0;
+      missed = 0;
 
     }
     public static void setX(int xval)
@@ -139,6 +141,12 @@ class DuckCanvas extends JComponent{
          return duckY = newH - 95;
       else
          return duckY = newH;
+    }
+    public static void GameOver(Graphics g)
+    {
+      Graphics2D gg = (Graphics2D) g;
+      gg.setFont(new Font("Comic Sans MS", Font.PLAIN, 80));
+      gg.drawString("GAME OVER",200,100);
     }
 
 
@@ -166,13 +174,19 @@ class DuckCanvas extends JComponent{
 
         if (x < 0 - duckW) {
             x = 800;
-            gg.drawImage(duck, x, updateY(), this);
+            missed++;
+            if(missed==5)
+              GameOver(gg);
+            else
+              gg.drawImage(duck, x, updateY(), this);
         }
 
         gg.drawImage(duck, x, getduckY(), this);
+        gg.setColor(Color.WHITE);
         gg.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         gg.drawString("Score: "+score,10,30);
-        gg.drawString("Level: "+level,10,70);
+        gg.drawString("Level: "+level,10,60);
+        gg.drawString("Missed: "+missed,10,90);
 
         duckX = x;
         duckY = y;
