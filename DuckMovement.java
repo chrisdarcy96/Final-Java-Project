@@ -26,6 +26,7 @@ public class DuckMovement{
         frame.getContentPane().setBackground(Color.BLUE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 400);
+        frame.setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
         frame.setLocationRelativeTo(null);
         frame.addMouseListener((MouseListener) click );
         frame.add(dc);
@@ -36,12 +37,17 @@ public class DuckMovement{
 
 }
 
-class Clicker extends JComponent implements MouseListener{
+class Clicker extends JComponent implements MouseListener, MouseMotionListener{
   private int score = 0;
 
 
 
-  public void mouseEntered(MouseEvent e){}
+  public void mouseEntered(MouseEvent e){
+    Toolkit toolkit = Toolkit.getDefaultToolkit();
+    Image image = toolkit.getImage("Mouse.png");
+    Cursor a = toolkit.createCustomCursor(image, new Point(this.getX(),this.getY()),"");
+    this.setCursor(a);
+  }
   public void mouseExited(MouseEvent e){}
   public void mouseClicked(MouseEvent e){
     int duckx = DuckCanvas.getduckX();
@@ -51,11 +57,17 @@ class Clicker extends JComponent implements MouseListener{
     int userx = e.getX();
     int usery = e.getY();
 
-    if(userx>duckx-20 && userx<duckx+duckw+20 && usery>ducky-20 && usery<ducky+duckh+20)
+    if(userx>duckx-50 && userx<duckx+duckw+50 && usery>ducky-50 && usery<ducky+duckh+50)
     {
       DuckCanvas.setX(800);
       score++;
-      System.out.println(score);
+      if(score == 10){
+        DuckCanvas.nextLevel();
+        score = 0;
+        }
+      else{
+        DuckCanvas.setScore(score);
+        DuckCanvas.updateY();}
     }
   }
   public void mousePressed(MouseEvent e){}
@@ -81,12 +93,14 @@ class Clicker extends JComponent implements MouseListener{
 
 
 class DuckCanvas extends JComponent{
-    private int duckW = 135;
-    private int duckH = 95;
-    private int duckX = 800;
-    private int duckY = getHeight()/2 - duckH;
+    private static int duckW = 135;
+    private static int duckH = 95;
+    private static int duckX = 800;
+    private static int duckY = 400 - duckH;
     private Image duck = new ImageIcon("duck.png").getImage();
-    private int score = 0;
+    private static int score = 0;
+    private static int duckSpeed = 3;
+    private static int level = 1;
 
 
     public DuckCanvas() {
@@ -101,15 +115,37 @@ class DuckCanvas extends JComponent{
 
         animationThread.start();
     }
-    public void setX(int xval)
+    public static void nextLevel()
+    {
+      level++;
+      duckSpeed+=2;
+      score = 0;
+
+    }
+    public static void setX(int xval)
     {
       duckX = xval;
     }
+    public static void setScore(int n)
+    {
+      score = n;
+    }
+    public static int updateY()
+    {
+      int newH = (int)(Math.random()*400);
+      if(newH < 95)
+         return duckY = newH + 95;
+      else if(newH > 305)
+         return duckY = newH - 95;
+      else
+         return duckY = newH;
+    }
 
-    public int getduckX(){return duckX;}
-    public int getduckY(){return duckY;}
-    public int getduckH(){return duckH;}
-    public int getduckW(){return duckW;}
+
+    public static int getduckX(){return duckX;}
+    public static int getduckY(){return duckY;}
+    public static int getduckH(){return duckH;}
+    public static int getduckW(){return duckW;}
     public void paintComponent(Graphics g) {
         Graphics2D gg = (Graphics2D) g;
 
@@ -117,17 +153,29 @@ class DuckCanvas extends JComponent{
         int h = getHeight();
 
 
-        int duckSpeed = 3;
+
 
         int x = duckX - duckSpeed;
+        int dir = (int)(Math.random()*15);
+        int y = duckY;
+        if(dir<5)
+          y = duckY - 1;
+        else if (dir>10)
+          y = duckY + 1;
+
 
         if (x < 0 - duckW) {
             x = 800;
+            gg.drawImage(duck, x, updateY(), this);
         }
 
-        gg.drawImage(duck, x, duckY, this);
+        gg.drawImage(duck, x, getduckY(), this);
+        gg.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        gg.drawString("Score: "+score,10,30);
+        gg.drawString("Level: "+level,10,70);
 
         duckX = x;
+        duckY = y;
     }
 
     /*public void mouseEntered(MouseEvent e){}
